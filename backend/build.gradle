@@ -57,6 +57,7 @@ dependencies {
 tasks.named('test') {
     outputs.dir snippetsDir
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport'
 }
 
 tasks.named('asciidoctor') {
@@ -73,6 +74,13 @@ task createDocument(type: Copy) {
 
 bootJar {
     dependsOn createDocument
+}
+
+jacocoTestReport {
+    reports {
+        html.enabled true
+        xml.enabled true
+    }
 }
 
 sonarqube {
